@@ -27,6 +27,10 @@ export async function generateMetadata({
       default: t('title')
     },
     description: t('description'),
+    icons: {
+      icon: '/logo.png', // Fallback/Explicit
+      apple: '/logo.png'
+    },
     openGraph: {
       title: t('title'),
       description: t('description'),
@@ -34,6 +38,20 @@ export async function generateMetadata({
       siteName: 'Rooftop Istanbul',
       locale: locale,
       type: 'website',
+      images: [
+        {
+          url: '/opengraph-image.png', // Explicitly referencing the file-based OG image if needed, or Next.js auto-discovery
+          width: 1200,
+          height: 630,
+          alt: 'Rooftop Istanbul Photoshoot',
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/opengraph-image.png'],
     }
   };
 }
