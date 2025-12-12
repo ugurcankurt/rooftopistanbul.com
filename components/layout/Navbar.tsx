@@ -1,14 +1,12 @@
 "use client"
 
 import { Link } from "@/i18n/navigation"
-import { Menu } from "lucide-react"
+import { Menu, Instagram, Facebook } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
     Sheet,
     SheetContent,
-    SheetHeader,
-    SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { useState } from "react"
@@ -75,21 +73,18 @@ export default function Navbar() {
                                 <span className="sr-only">Toggle menu</span>
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                            <SheetHeader className="text-left border-b pb-4 mb-4">
-                                <SheetTitle className="text-2xl font-bold">{t('menu')}</SheetTitle>
-                            </SheetHeader>
-                            <div className="flex flex-col gap-4">
+                        <SheetContent side="right" className="w-[300px] sm:w-[400px] flex flex-col pt-12">
+                            <div className="flex flex-col gap-6 items-center mt-4">
                                 <Link
                                     href="/themes"
-                                    className="text-lg font-medium hover:text-amber-500 transition-colors py-2"
+                                    className="text-xl font-medium hover:text-amber-500 transition-colors py-2"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {t('themes')}
                                 </Link>
                                 <Link
                                     href="/our-packages"
-                                    className="text-lg font-medium hover:text-amber-500 transition-colors py-2"
+                                    className="text-xl font-medium hover:text-amber-500 transition-colors py-2"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {t('packages')}
@@ -97,16 +92,25 @@ export default function Navbar() {
 
                                 <Link
                                     href="/contact"
-                                    className="text-lg font-medium hover:text-amber-500 transition-colors py-2"
+                                    className="text-xl font-medium hover:text-amber-500 transition-colors py-2"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {t('contact')}
                                 </Link>
-                                <Button asChild className="w-full rounded-full bg-amber-500 hover:bg-amber-600 text-white font-bold mt-4">
+                                <Button asChild className="w-full max-w-[200px] rounded-full bg-amber-500 hover:bg-amber-600 text-white font-bold mt-4">
                                     <Link href="/our-packages" onClick={() => setIsOpen(false)}>
                                         {t('bookNow')}
                                     </Link>
                                 </Button>
+
+                                <div className="flex gap-4 mt-4">
+                                    <a href="https://instagram.com/novaphotoistanbul" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-100 hover:bg-amber-600 transition-colors text-amber-900 hover:text-white">
+                                        <Instagram className="w-5 h-5" />
+                                    </a>
+                                    <a href="https://facebook.com/novaphotoistanbul" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-100 hover:bg-blue-600 transition-colors text-amber-900 hover:text-white">
+                                        <Facebook className="w-5 h-5" />
+                                    </a>
+                                </div>
                             </div>
                         </SheetContent>
                     </Sheet>
