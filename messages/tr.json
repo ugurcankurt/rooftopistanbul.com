@@ -2,6 +2,7 @@
     "Navbar": {
         "home": "Anasayfa",
         "themes": "Temalar",
+        "portfolio": "Portfolyo",
         "packages": "Paketler",
         "testimonials": "Yorumlar",
         "bookNow": "Rezervasyon Yap",
@@ -146,5 +147,18 @@
         "subtotal": "Ara Toplam",
         "finalTotal": "Genel Toplam",
         "extraTotal": "Ekstralar Toplamı"
+    },
+    "Portfolio": {
+        "title": "Portfolyomuz",
+        "description": "İstanbul'daki stüdyo ve dış mekan çekimlerimizden en son kareleri keşfedin.",
+        "tabs": {
+            "all": "Tümü",
+            "studio": "Stüdyo",
+            "outdoor": "Dış Mekan",
+            "wedding": "Düğün",
+            "special": "Özel Günler"
+        },
+        "loadMore": "Daha Fazla",
+        "noImages": "Bu kategoride henüz görsel bulunmuyor."
     }
 }

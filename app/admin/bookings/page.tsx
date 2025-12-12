@@ -5,8 +5,9 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { getAdminBookings } from "@/app/actions/booking-actions"
 import BookingTable from "@/components/admin/BookingTable"
-import { LogOut, LayoutDashboard, RefreshCcw } from "lucide-react"
+import { LogOut, LayoutDashboard, RefreshCcw, Image as ImageIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 import { AlertCircle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -72,6 +73,11 @@ export default function AdminDashboard() {
                     </div>
 
                     <div className="flex items-center gap-4">
+                        <Link href="/admin/portfolio">
+                            <Button variant="secondary" size="sm" className="gap-2">
+                                <ImageIcon className="w-4 h-4" /> Portfolyo
+                            </Button>
+                        </Link>
                         <Button variant="outline" size="sm" onClick={fetchBookings} className="gap-2">
                             <RefreshCcw size={16} /> Yenile
                         </Button>

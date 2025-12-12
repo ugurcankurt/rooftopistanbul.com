@@ -2,6 +2,7 @@
     "Navbar": {
         "home": "Home",
         "themes": "Themes",
+        "portfolio": "Portfolio",
         "packages": "Packages",
         "testimonials": "Testimonials",
         "bookNow": "Book Now",
@@ -146,5 +147,18 @@
         "subtotal": "Subtotal",
         "finalTotal": "Final Total",
         "extraTotal": "Extras Total"
+    },
+    "Portfolio": {
+        "title": "Our Portfolio",
+        "description": "Explore our latest photoshoots from studio and outdoor sessions in Istanbul.",
+        "tabs": {
+            "all": "All",
+            "studio": "Studio",
+            "outdoor": "Outdoor",
+            "wedding": "Wedding",
+            "special": "Special Events"
+        },
+        "loadMore": "Load More",
+        "noImages": "No images found in this category."
     }
 }

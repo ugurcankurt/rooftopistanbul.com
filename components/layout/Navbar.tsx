@@ -45,6 +45,9 @@ export default function Navbar() {
                     <Link href="/themes" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
                         {t('themes')}
                     </Link>
+                    <Link href="/portfolio" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
+                        {t('portfolio')}
+                    </Link>
                     <Link href="/our-packages" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
                         {t('packages')}
                     </Link>
@@ -83,6 +86,13 @@ export default function Navbar() {
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {t('themes')}
+                                </Link>
+                                <Link
+                                    href="/portfolio"
+                                    className="text-xl font-medium hover:text-amber-500 transition-colors py-2"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    {t('portfolio')}
                                 </Link>
                                 <Link
                                     href="/our-packages"

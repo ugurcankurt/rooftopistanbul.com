@@ -1,12 +1,18 @@
-import "@/app/globals.css"
-import { Inter } from "next/font/google"
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "@/app/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Admin Panel - Rooftop Istanbul",
-    description: "Reservation Management System",
-}
+    description: "Admin Management System",
+    robots: {
+        index: false,
+        follow: false,
+    },
+};
 
 export default function AdminLayout({
     children,
@@ -19,6 +25,7 @@ export default function AdminLayout({
                 <main className="min-h-screen bg-gray-50 text-gray-900">
                     {children}
                 </main>
+                <Toaster />
             </body>
         </html>
     )

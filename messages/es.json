@@ -2,6 +2,7 @@
     "Navbar": {
         "home": "Inicio",
         "themes": "Temas",
+        "portfolio": "Portafolio",
         "packages": "Paquetes",
         "testimonials": "Testimonios",
         "bookNow": "Reservar Ahora",
@@ -146,5 +147,18 @@
         "subtotal": "Subtotal",
         "finalTotal": "Total Final",
         "extraTotal": "Total Extras"
+    },
+    "Portfolio": {
+        "title": "Nuestro Portafolio",
+        "description": "Explora nuestras últimas sesiones de fotos en estudio y exteriores en Estambul.",
+        "tabs": {
+            "all": "Todos",
+            "studio": "Estudio",
+            "outdoor": "Exterior",
+            "wedding": "Boda",
+            "special": "Eventos Especiales"
+        },
+        "loadMore": "Cargar Más",
+        "noImages": "No se encontraron imágenes en esta categoría."
     }
 }
