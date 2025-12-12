@@ -1,0 +1,122 @@
+{
+    "Navbar": {
+        "home": "Anasayfa",
+        "themes": "Temalar",
+        "packages": "Paketler",
+        "testimonials": "Yorumlar",
+        "bookNow": "Rezervasyon Yap",
+        "menu": "Menü",
+        "contact": "İletişim"
+    },
+    "Layout": {
+        "metadata": {
+            "title": "Rooftop Istanbul - Profesyonel Fotoğraf Çekimi Deneyimleri",
+            "description": "İstanbul'un eşsiz boğaz manzarasıyla en güzel anılarınızı ölümsüzleştirin. Uçan Elbise, Çatı Katı ve daha fazla konsept."
+        }
+    },
+    "Footer": {
+        "description": "İstanbul'un en ikonik manzaralarında anılarınızı ölümsüzleştirin. En iyi çatılarda profesyonel fotoğraf çekimi hizmetleri.",
+        "navigation": "Navigasyon",
+        "contact": "İletişim",
+        "social": "Sosyal Medya",
+        "rights": "Tüm hakları saklıdır.",
+        "phone": "+90 532 291 94 67",
+        "email": "nova.photo34@gmail.com",
+        "address": "Süleymaniye, Siyavuş Paşa Sk. No:24, 34116 Fatih/İstanbul",
+        "madeBy": "Istanbul Photographer tarafından yapılmıştır"
+    },
+    "Contact": {
+        "title": "İletişim",
+        "description": "İstanbul'daki hayalinizdeki fotoğraf çekimi için bizimle iletişime geçin.",
+        "info": "İletişim Bilgileri",
+        "formTitle": "Bize mesaj gönderin",
+        "addressLabel": "Adres",
+        "emailLabel": "E-posta",
+        "phoneLabel": "Telefon / WhatsApp",
+        "chatWhatsapp": "WhatsApp'ta Sohbet Et",
+        "googleMapsDesc": "Google Haritalar'da konumumuzu, fotoğraflarımızı ve yorumlarımızı görüntüleyin.",
+        "openMaps": "Google Haritalar Profilini Aç"
+    },
+    "Home": {
+        "hero": {
+            "tag": "Premium Fotoğraf Stüdyosu",
+            "ctaPrimary": "Paketleri İncele",
+            "ctaSecondary": "Temaları Keşfet"
+        },
+        "themes": {
+            "title": "Fotoğraf Temaları",
+            "description": "Fotoğraf çekiminizi benzersiz kılmak için çeşitli temalar sunuyoruz. Favorinizi seçin veya tam bir albüm için birleştirin.",
+            "noConcepts": "Tema bulunamadı."
+        },
+        "whyUs": {
+            "title": "Neden Biz?"
+        }
+    },
+    "Testimonials": {
+        "title": "Müşteri Yorumları",
+        "description": "Sadece bize inanmayın. İşte güzel misafirlerimizin deneyimleri hakkında söyledikleri."
+    },
+    "Packages": {
+        "title": "Paketlerimiz",
+        "description": "Her bütçeye uygun şeffaf fiyatlandırma. İstanbul anınız için mükemmel paketi seçin.",
+        "tabs": {
+            "studio": "Stüdyo Çekimi",
+            "outdoor": "Dış Mekan Çekimi"
+        },
+        "noOutdoor": "Mevcut dış mekan paketi yok.",
+        "noStudio": "Stüdyo paketleri yakında!",
+        "custom": {
+            "title": "Özel bir şey mi lazım?",
+            "description": "Özel grup oturumları, evlilik teklifleri ve katalog çekimleri de sunuyoruz.",
+            "cta": "Teklif için bizimle iletişime geçin"
+        },
+        "error": "Paketler yüklenirken hata oluştu. Lütfen daha sonra tekrar deneyin.",
+        "selectButton": "Paket Seç",
+        "mostPopular": "En Popüler",
+        "perPerson": "/ kişi başı"
+    },
+    "Reservation": {
+        "title": "Rezervasyonu Tamamla",
+        "personalInfo": "Kişisel Bilgiler",
+        "participants": "Katılımcılar",
+        "extras": "Ekstralar",
+        "name": "İsim Soyisim",
+        "email": "E-posta Adresi",
+        "whatsapp": "WhatsApp Numarası",
+        "date": "Fotoğraf Çekimi Tarih ve Saat",
+        "pickDate": "Tarih Seç",
+        "selectTime": "Saat Seç",
+        "package": "Seçilen Paket",
+        "extra": "Ekstra paket eklemek ister misin? (İsteğe Bağlı)",
+        "vip": "VIP Transfer İstiyorum",
+        "vipDescription": "Tüm grubunuz için premium özel transfer.",
+        "makeup": "Basic Makyaj İstiyorum",
+        "makeupDescription": "{count} katılımcı için profesyonel temel makyaj.",
+        "addOns": "Ek Paketler",
+        "adults": "Yetişkin Sayısı",
+        "children": "Çocuk (<6 Yaş)",
+        "childDress": "Çocuk Elbise Kiralama (30€/çocuk)",
+        "submit": "Rezervasyon Oluştur",
+        "submitting": "Gönderiliyor...",
+        "success": "Rezervasyonunuz başarıyla oluşturuldu! Sizinle en kısa sürede iletişime geçeceğiz.",
+        "error": "Rezervasyon oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
+        "notes": "Notlar ve Özel İstekler",
+        "notesPlaceholder": "Sorularınız veya özel istekleriniz varsa buraya yazabilirsiniz.",
+        "discountApplied": "İndirim Uygulandı",
+        "discount": "İndirim",
+        "totalPrice": "Toplam Fiyat",
+        "perPerson": "/ kişi başı",
+        "selectPlaceholder": "Seçiniz",
+        "errors": {
+            "selectDate": "Lütfen fotoğraf çekiminiz için bir tarih ve saat seçin."
+        }
+    },
+    "Breadcrumbs": {
+        "home": "Anasayfa",
+        "our-packages": "Paketlerimiz",
+        "contact": "İletişim",
+        "about": "Hakkımızda",
+        "themes": "Temalar",
+        "reservation": "Rezervasyon"
+    }
+}

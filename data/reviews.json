@@ -1,0 +1,97 @@
+[
+    {
+        "id": "gmb-1",
+        "client_name": "Kamekia Baker",
+        "rating": 5,
+        "location": {
+            "en": "Google Review",
+            "tr": "Google Yorumu",
+            "ru": "Google Отзыв",
+            "ar": "مراجعة جوجل",
+            "es": "Reseña de Google"
+        },
+        "quote": {
+            "en": "Photograph was excellent and very patient. He did a good job with the photo shoot.",
+            "tr": "Fotoğrafçı harikaydı ve çok sabırlıydı. Fotoğraf çekiminde çok iyi iş çıkardı.",
+            "ru": "Фотограф был великолепен и очень терпелив. Он отлично справился с фотосессией.",
+            "ar": "كان المصور ممتازًا وصبورًا جدًا. قام بعمل جيد في جلسة التصوير.",
+            "es": "El fotógrafo fue excelente y muy paciente. Hizo un buen trabajo con la sesión de fotos."
+        }
+    },
+    {
+        "id": "gmb-2",
+        "client_name": "Saddek Ben",
+        "rating": 5,
+        "location": {
+            "en": "Google Review",
+            "tr": "Google Yorumu",
+            "ru": "Google Отзыв",
+            "ar": "مراجعة جوجل",
+            "es": "Reseña de Google"
+        },
+        "quote": {
+            "en": "Beautiful view for your photos, coffee, hookah or a small coffee, super friendly staff.",
+            "tr": "Fotoğraflarınız için güzel bir manzara, kahve, nargile veya küçük bir kahve, süper dost canlısı personel.",
+            "ru": "Прекрасный вид для ваших фотографий, кофе, кальян или просто чашечка кофе, супер дружелюбный персонал.",
+            "ar": "إطلالة جميلة لصورك، قهوة، نرجيلة أو قهوة صغيرة، طاقم عمل ودود للغاية.",
+            "es": "Hermosa vista para tus fotos, café, narguile o un pequeño café, personal súper amable."
+        }
+    },
+    {
+        "id": "gmb-3",
+        "client_name": "Nick A.",
+        "rating": 5,
+        "location": {
+            "en": "Google Review",
+            "tr": "Google Yorumu",
+            "ru": "Google Отзыв",
+            "ar": "مراجعة جوجل",
+            "es": "Reseña de Google"
+        },
+        "quote": {
+            "en": "Simply fantastic! Very professional and very friendly staff who supported and advised us. Really great ambiance and really cool photos. We can warmly recommend it.",
+            "tr": "Tek kelimeyle harika! Bizi destekleyen ve tavsiyelerde bulunan çok profesyonel ve çok dost canlısı personel. Gerçekten harika bir atmosfer ve gerçekten havalı fotoğraflar. Şiddetle tavsiye edebiliriz.",
+            "ru": "Просто фантастика! Очень профессиональные и очень дружелюбные сотрудники, которые поддерживали и консультировали нас. Действительно отличная атмосфера и действительно крутые фотографии. Мы можем горячо рекомендовать.",
+            "ar": "ببساطة رائع! موظفون محترفون للغاية وودودون للغاية قدموا لنا الدعم والمشورة. أجواء رائعة حقًا وصور رائعة حقًا. نوصي به بشدة.",
+            "es": "¡Simplemente fantástico! Personal muy profesional y muy amable que nos apoyó y aconsejó. Un ambiente realmente genial y fotos realmente geniales. Lo recomendamos encarecidamente."
+        }
+    },
+    {
+        "id": "gmb-4",
+        "client_name": "Lakeysha",
+        "rating": 5,
+        "location": {
+            "en": "Google Review",
+            "tr": "Google Yorumu",
+            "ru": "Google Отзыв",
+            "ar": "مراجعة جوجل",
+            "es": "Reseña de Google"
+        },
+        "quote": {
+            "en": "Loved the whole experience! Booked through WhatsApp and they confirmed everything. We showed up and picked the package we wanted and the dress! They have so many options! There was a dressing room, vanity and jewelry. They ensured we had water because it does get hot in the sun moving around in a big dress. I got the package for 150e and it included 4 photo areas, digital videos and 30 edited photos. They gave us tea while we waited for the photos to get done. When done they transfer everything to you right then, no waiting weeks!",
+            "tr": "Tüm deneyimi çok sevdim! WhatsApp üzerinden rezervasyon yaptırdım ve her şeyi onayladılar. Gittik ve istediğimiz paketi ve elbiseyi seçtik! Çok fazla seçenekleri var! Giyinme odası, makyaj masası ve takılar vardı. Büyük bir elbiseyle dolaşırken güneşin altında hava ısındığından suyumuzun olduğundan emin oldular. 150€'luk paketi aldım ve 4 fotoğraf alanı, dijital videolar ve 30 düzenlenmiş fotoğraf içeriyordu. Fotoğrafların bitmesini beklerken bize çay ikram ettiler. Bittiğinde her şeyi o anda size aktarıyorlar, haftalarca beklemek yok!",
+            "ru": "Понравился весь опыт! Забронировала через WhatsApp, и они все подтвердили. Мы пришли и выбрали пакет, который хотели, и платье! У них так много вариантов! Была гардеробная, туалетный столик и украшения. Они позаботились о том, чтобы у нас была вода, потому что на солнце становится жарко, когда двигаешься в большом платье. Я взяла пакет за 150 евро, в который входили 4 фотозоны, цифровые видео и 30 отредактированных фотографий. Нас угостили чаем, пока мы ждали, когда фотографии будут готовы. Когда все было готово, они сразу же передали нам все, не нужно ждать неделями!",
+            "ar": "أحببت التجربة برمتها! حجزت عبر الواتساب وقاموا بتأكيد كل شيء. حضرنا واخترنا الباقة التي أردناها والفستان! لديهم خيارات كثيرة جداً! كانت هناك غرفة ملابس وطاولة تجميل ومجوهرات.  حرصوا على توفير الماء لنا لأن الجو يصبح حاراً في الشمس عند التحرك بفستان كبير.  حصلت على باقة 150 يورو وتضمنت 4 مناطق تصوير ومقاطع فيديو رقمية و30 صورة معدلة.  قدموا لنا الشاي بينما كنا ننتظر الانتهاء من الصور.  عند الانتهاء قاموا بنقل كل شيء إلينا في الحال، لا داعي للانتظار لأسابيع!",
+            "es": "¡Me encantó toda la experiencia! Reservé por WhatsApp y confirmaron todo. ¡Llegamos y elegimos el paquete que queríamos y el vestido! ¡Tienen tantas opciones! Había un probador, tocador y joyas. Se aseguraron de que tuviéramos agua porque hace calor al sol moviéndose con un vestido grande. Obtuve el paquete por 150e e incluía 4 áreas de fotos, videos digitales y 30 fotos editadas. Nos dieron té mientras esperábamos a que terminaran las fotos. Cuando terminaron, te transfieren todo en ese momento, ¡sin esperar semanas!"
+        }
+    },
+    {
+        "id": "gmb-5",
+        "client_name": "Ranjinder Hans",
+        "rating": 5,
+        "location": {
+            "en": "Google Review",
+            "tr": "Google Yorumu",
+            "ru": "Google Отзыв",
+            "ar": "مراجعة جوجل",
+            "es": "Reseña de Google"
+        },
+        "quote": {
+            "en": "Amazing experience during my photoshoot and Ugur was pleasant and easy to work with.",
+            "tr": "Fotoğraf çekimim sırasında harika bir deneyimdi ve Uğur ile çalışmak keyifli ve kolaydı.",
+            "ru": "Удивительный опыт во время моей фотосессии, и с Угуром было приятно и легко работать.",
+            "ar": "تجربة مذهلة خلال جلسة التصوير الخاصة بي وكان أوغور لطيفًا وسهل التعامل معه.",
+            "es": "Experiencia increíble durante mi sesión de fotos y fue agradable y fácil trabajar con Ugur."
+        }
+    }
+]

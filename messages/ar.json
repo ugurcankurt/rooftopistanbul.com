@@ -1,0 +1,122 @@
+{
+    "Navbar": {
+        "home": "الرئيسية",
+        "themes": "المواضيع",
+        "packages": "الباقات",
+        "testimonials": "الآراء",
+        "bookNow": "احجز الآن",
+        "menu": "القائمة",
+        "contact": "اتصل بنا"
+    },
+    "Layout": {
+        "metadata": {
+            "title": "Rooftop Istanbul - تجارب تصوير احترافية",
+            "description": "التقط أفضل ذكرياتك مع إطلالة البوسفور. الفستان الطائر، السطح، والمزيد من مفاهيم التصوير في إسطنبول."
+        }
+    },
+    "Footer": {
+        "description": "التقط ذكرياتك مع أكثر المناظر شهرة في إسطنبول. خدمات تصوير احترافية على أفضل الأسطح.",
+        "navigation": "تصفح",
+        "contact": "اتصل بنا",
+        "social": "تواصل اجتماعي",
+        "rights": "جميع الحقوق محفوظة.",
+        "phone": "+90 532 291 94 67",
+        "email": "nova.photo34@gmail.com",
+        "address": "Süleymaniye, Siyavuş Paşa Sk. No:24, 34116 Fatih/İstanbul",
+        "madeBy": "صنع بواسطة مصور اسطنبول"
+    },
+    "Contact": {
+        "title": "اتصل بنا",
+        "description": "تواصل معنا للحصول على جلسة التصوير التي تحلم بها في إسطنبول.",
+        "info": "معلومات الاتصال",
+        "formTitle": "أرسل لنا رسالة",
+        "addressLabel": "العنوان",
+        "emailLabel": "البريد الإلكتروني",
+        "phoneLabel": "الهاتف / واتساب",
+        "chatWhatsapp": "الدردشة على واتساب",
+        "googleMapsDesc": "عرض موقعنا والصور والتعليقات مباشرة على خرائط جوجل.",
+        "openMaps": "فتح ملف خرائط جوجل"
+    },
+    "Home": {
+        "hero": {
+            "tag": "ستوديو تصوير متميز",
+            "ctaPrimary": "تصفح الباقات",
+            "ctaSecondary": "استكشف المواضيع"
+        },
+        "themes": {
+            "title": "مواضيع الصور",
+            "description": "نقدم مجموعة متنوعة من المواضيع لجعل جلسة التصوير الخاصة بك فريدة. اختر المفضلة لديك أو اجمع بينها لألبوم كامل.",
+            "noConcepts": "لا توجد مفاهيم."
+        },
+        "whyUs": {
+            "title": "لماذا نحن؟"
+        }
+    },
+    "Testimonials": {
+        "title": "آراء العملاء",
+        "description": "لا تأخذ كلامنا فقط. إليك ما يقوله ضيوفنا الجميلون عن تجربتهم."
+    },
+    "Packages": {
+        "title": "باقاتنا",
+        "description": "أسعار شفافة لكل الميزانيات. اختر الباقة المثالية لذكرى إسطنبول الخاصة بك.",
+        "tabs": {
+            "studio": "تصوير ستوديو",
+            "outdoor": "تصوير خارجي"
+        },
+        "noOutdoor": "لأسف، لا توجد باقات خارجية متاحة حالياً.",
+        "noStudio": "باقات الاستوديو قريباً!",
+        "custom": {
+            "title": "هل تحتاج إلى شيء خاص؟",
+            "description": "نقدم أيضًا جلسات جماعية خاصة، وعروض زواج، وتصوير كتالوج.",
+            "cta": "اتصل بنا للحصول على عرض سعر"
+        },
+        "error": "خطأ في تحميل الباقات. يرجى المحاولة مرة أخرى لاحقاً.",
+        "selectButton": "اختر الباقة",
+        "mostPopular": "الأكثر شعبية",
+        "perPerson": "/ للشخص"
+    },
+    "Reservation": {
+        "title": "إتمام الحجز",
+        "personalInfo": "معلومات شخصية",
+        "participants": "المشاركون",
+        "extras": "إضافات",
+        "name": "Full Name",
+        "email": "Email Address",
+        "whatsapp": "WhatsApp Number",
+        "date": "Photoshoot Date & Time",
+        "pickDate": "اختر تاريخًا",
+        "selectTime": "اختر الوقت",
+        "package": "Selected Package",
+        "extra": "هل تريد إضافة باقات إضافية؟ (اختياري)",
+        "vip": "أريد خدمة نقل VIP",
+        "vipDescription": "نقل خاص ممتاز لمجموعتك بأكملها.",
+        "makeup": "أريد مكياج أساسي",
+        "makeupDescription": "مكياج أساسي احترافي لـ {count} مشارك.",
+        "addOns": "باقات إضافية",
+        "adults": "بالغين",
+        "children": "أطفال (<6 سنوات)",
+        "childDress": "تأجير فستان أطفال (30€/للطفل)",
+        "submit": "إرسال الحجز",
+        "submitting": "جارٍ الإرسال...",
+        "success": "Reservation submitted successfully! We will contact you soon.",
+        "error": "Error submitting reservation. Please try again.",
+        "notes": "Notes & Special Requests",
+        "notesPlaceholder": "أي أسئلة أو طلبات خاصة؟",
+        "discountApplied": "تم تطبيق الخصم",
+        "discount": "خصم",
+        "totalPrice": "السعر الإجمالي",
+        "perPerson": "/ للشخص",
+        "selectPlaceholder": "اختر",
+        "errors": {
+            "selectDate": "يرجى تحديد موعد ووقت لجلسة التصوير الخاصة بك."
+        }
+    },
+    "Breadcrumbs": {
+        "home": "الرئيسية",
+        "our-packages": "باقاتنا",
+        "contact": "اتصل بنا",
+        "about": "من نحن",
+        "themes": "الثيمات",
+        "reservation": "حجز"
+    }
+}

@@ -1,0 +1,122 @@
+{
+    "Navbar": {
+        "home": "Inicio",
+        "themes": "Temas",
+        "packages": "Paquetes",
+        "testimonials": "Testimonios",
+        "bookNow": "Reservar Ahora",
+        "menu": "Menú",
+        "contact": "Contacto"
+    },
+    "Layout": {
+        "metadata": {
+            "title": "Rooftop Istanbul - Experiencias de Fotografía Profesional",
+            "description": "Captura tus mejores recuerdos con la vista del Bósforo. Vestido Volador, Azotea y más conceptos de sesión de fotos en Estambul."
+        }
+    },
+    "Footer": {
+        "description": "Captura tus recuerdos con las vistas más icónicas de Estambul. Servicios de fotografía profesional en las mejores azoteas.",
+        "navigation": "Navegación",
+        "contact": "Contacto",
+        "social": "Social",
+        "rights": "Todos los derechos reservados.",
+        "phone": "+90 532 291 94 67",
+        "email": "nova.photo34@gmail.com",
+        "address": "Süleymaniye, Siyavuş Paşa Sk. No:24, 34116 Fatih/İstanbul",
+        "madeBy": "Hecho por Istanbul Photographer"
+    },
+    "Contact": {
+        "title": "Contacto",
+        "description": "Ponte en contacto con nosotros para tu sesión de fotos soñada en Estambul.",
+        "info": "Información de contacto",
+        "formTitle": "Envíanos un mensaje",
+        "addressLabel": "Dirección",
+        "emailLabel": "Correo Electrónico",
+        "phoneLabel": "Teléfono / WhatsApp",
+        "chatWhatsapp": "Chatear en WhatsApp",
+        "googleMapsDesc": "Vea nuestra ubicación, fotos y reseñas directamente en Google Maps.",
+        "openMaps": "Abrir perfil de Google Maps"
+    },
+    "Home": {
+        "hero": {
+            "tag": "Estudio de Fotografía Premium",
+            "ctaPrimary": "Ver Paquetes",
+            "ctaSecondary": "Explorar Temas"
+        },
+        "themes": {
+            "title": "Temas de Fotos",
+            "description": "Ofrecemos una variedad de temas para hacer tu sesión de fotos única. Elige tu favorito o combínalos para un álbum completo.",
+            "noConcepts": "No se encontraron conceptos."
+        },
+        "whyUs": {
+            "title": "¿Por qué nosotros?"
+        }
+    },
+    "Testimonials": {
+        "title": "Amor del Cliente",
+        "description": "No solo nos creas a nosotros. Aquí está lo que dicen nuestros hermosos huéspedes sobre su experiencia."
+    },
+    "Packages": {
+        "title": "Nuestros Paquetes",
+        "description": "Precios transparentes para todos los presupuestos. Elige el paquete perfecto para tu recuerdo de Estambul.",
+        "tabs": {
+            "studio": "Sesión de Estudio",
+            "outdoor": "Sesión en Exteriores"
+        },
+        "noOutdoor": "No hay paquetes en exteriores disponibles.",
+        "noStudio": "¡Paquetes de estudio próximamente!",
+        "custom": {
+            "title": "¿Necesitas algo personalizado?",
+            "description": "También ofrecemos sesiones privadas en grupo, propuestas de matrimonio y sesiones de catálogo.",
+            "cta": "Contáctanos para una cotización"
+        },
+        "error": "Error al cargar los paquetes. Por favor, inténtelo de nuevo más tarde.",
+        "selectButton": "Seleccionar Paquete",
+        "mostPopular": "Más Popular",
+        "perPerson": "/ persona"
+    },
+    "Reservation": {
+        "title": "Completar Reserva",
+        "personalInfo": "Información Personal",
+        "participants": "Participantes",
+        "extras": "Extras",
+        "name": "Full Name",
+        "email": "Email Address",
+        "whatsapp": "WhatsApp Number",
+        "date": "Photoshoot Date & Time",
+        "pickDate": "Elegir fecha",
+        "selectTime": "Elegir hora",
+        "package": "Selected Package",
+        "extra": "¿Quieres añadir paquetes adicionales? (Opcional)",
+        "vip": "Quiero traslado VIP",
+        "vipDescription": "Transferencia privada premium para todo tu grupo.",
+        "makeup": "Quiero maquillaje básico",
+        "makeupDescription": "Maquillaje básico profesional para {count} participantes.",
+        "addOns": "Paquetes Adicionales",
+        "adults": "Adultos",
+        "children": "Niños (<6 años)",
+        "childDress": "Alquiler de vestido de niña (30€/niño)",
+        "submit": "Confirmar Reserva",
+        "submitting": "Enviando...",
+        "success": "Reservation submitted successfully! We will contact you soon.",
+        "error": "Error submitting reservation. Please try again.",
+        "notes": "Notes & Special Requests",
+        "notesPlaceholder": "¿Alguna pregunta o solicitud especial?",
+        "discountApplied": "Descuento Aplicado",
+        "discount": "Descuento",
+        "totalPrice": "Precio Total",
+        "perPerson": "/ persona",
+        "selectPlaceholder": "Seleccionar",
+        "errors": {
+            "selectDate": "Por favor seleccione una fecha y hora para su sesión de fotos."
+        }
+    },
+    "Breadcrumbs": {
+        "home": "Inicio",
+        "our-packages": "Nuestros Paquetes",
+        "contact": "Contacto",
+        "about": "Sobre Nosotros",
+        "themes": "Temas",
+        "reservation": "Reserva"
+    }
+}

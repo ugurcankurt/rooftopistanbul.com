@@ -1,0 +1,122 @@
+{
+    "Navbar": {
+        "home": "Главная",
+        "themes": "Темы",
+        "packages": "Пакеты",
+        "testimonials": "Отзывы",
+        "bookNow": "Забронировать",
+        "menu": "Меню",
+        "contact": "Контакты"
+    },
+    "Layout": {
+        "metadata": {
+            "title": "Rooftop Istanbul - Профессиональные Фотосессии",
+            "description": "Запечатлейте свои лучшие воспоминания с видом на Босфор. Летящее платье, крыша и другие концепции фотосессий в Стамбуле."
+        }
+    },
+    "Footer": {
+        "description": "Запечатлейте свои воспоминания на фоне самых знаковых видов Стамбула. Профессиональные фотосессии на лучших крышах.",
+        "navigation": "Навигация",
+        "contact": "Контакты",
+        "social": "Соцсети",
+        "rights": "Все права защищены.",
+        "phone": "+90 532 291 94 67",
+        "email": "nova.photo34@gmail.com",
+        "address": "Süleymaniye, Siyavuş Paşa Sk. No:24, 34116 Fatih/İstanbul",
+        "madeBy": "Сделано Istanbul Photographer"
+    },
+    "Contact": {
+        "title": "Свяжитесь с нами",
+        "description": "Свяжитесь с нами для организации фотосессии вашей мечты в Стамбуле.",
+        "info": "Контактная информация",
+        "formTitle": "Отправьте нам сообщение",
+        "addressLabel": "Адрес",
+        "emailLabel": "Электронная Почта",
+        "phoneLabel": "Телефон / WhatsApp",
+        "chatWhatsapp": "Чат в WhatsApp",
+        "googleMapsDesc": "Посмотрите наше местоположение, фотографии и отзывы непосредственно на Google Картах.",
+        "openMaps": "Открыть профиль Google Maps"
+    },
+    "Home": {
+        "hero": {
+            "tag": "Премиум Фотостудия",
+            "ctaPrimary": "Смотреть Пакеты",
+            "ctaSecondary": "Изучить Темы"
+        },
+        "themes": {
+            "title": "Темы Фотосессий",
+            "description": "Мы предлагаем разнообразие тем, чтобы сделать вашу фотосессию уникальной. Выберите любимую или комбинируйте для полного альбома.",
+            "noConcepts": "Концепции не найдены."
+        },
+        "whyUs": {
+            "title": "Почему Мы?"
+        }
+    },
+    "Testimonials": {
+        "title": "Отзывы Клиентов",
+        "description": "Не верьте нам на слово. Вот что говорят наши прекрасные гости о своем опыте."
+    },
+    "Packages": {
+        "title": "Наши Пакеты",
+        "description": "Прозрачные цены для любого бюджета. Выберите идеальный пакет для вашего воспоминания о Стамбуле.",
+        "tabs": {
+            "studio": "Студийная Съемка",
+            "outdoor": "Уличная Съемка"
+        },
+        "noOutdoor": "Нет доступных пакетов для уличной съемки.",
+        "noStudio": "Студийные пакеты скоро будут!",
+        "custom": {
+            "title": "Нужно что-то особенное?",
+            "description": "Мы также предлагаем частные групповые сессии, предложения руки и сердца и каталожные съемки.",
+            "cta": "Свяжитесь с нами для оценки"
+        },
+        "error": "Ошибка загрузки пакетов. Пожалуйста, попробуйте позже.",
+        "selectButton": "Выбрать Пакет",
+        "mostPopular": "Самый Популярный",
+        "perPerson": "/ чел."
+    },
+    "Reservation": {
+        "title": "Завершить бронирование",
+        "personalInfo": "Личная Информация",
+        "participants": "Участники",
+        "extras": "Дополнительно",
+        "name": "Full Name",
+        "email": "Email Address",
+        "whatsapp": "WhatsApp Number",
+        "date": "Photoshoot Date & Time",
+        "pickDate": "Выбрать Дату",
+        "selectTime": "Выбрать Время",
+        "package": "Selected Package",
+        "extra": "Хотите добавить дополнительные пакеты? (Необязательно)",
+        "vip": "Я хочу VIP трансфер",
+        "vipDescription": "Премиальный частный трансфер для всей группы.",
+        "makeup": "Я хочу базовый макияж",
+        "makeupDescription": "Профессиональный базовый макияж для {count} участников.",
+        "addOns": "Дополнительные Пакеты",
+        "adults": "Взрослые",
+        "children": "Дети (<6 лет)",
+        "childDress": "Аренда детского платья (30€/за ребенка)",
+        "submit": "Подтвердить бронирование",
+        "submitting": "Отправка...",
+        "success": "Reservation submitted successfully! We will contact you soon.",
+        "error": "Error submitting reservation. Please try again.",
+        "notes": "Notes & Special Requests",
+        "notesPlaceholder": "Есть вопросы или особые пожелания?",
+        "discountApplied": "Скидка Применена",
+        "discount": "Скидка",
+        "totalPrice": "Итоговая Цена",
+        "perPerson": "/ чел.",
+        "selectPlaceholder": "Выбрать",
+        "errors": {
+            "selectDate": "Пожалуйста, выберите дату и время для фотосессии."
+        }
+    },
+    "Breadcrumbs": {
+        "home": "Главная",
+        "our-packages": "Наши пакеты",
+        "contact": "Контакты",
+        "about": "О нас",
+        "themes": "Темы",
+        "reservation": "Бронирование"
+    }
+}

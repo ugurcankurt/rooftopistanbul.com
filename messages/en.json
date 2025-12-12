@@ -1,0 +1,122 @@
+{
+    "Navbar": {
+        "home": "Home",
+        "themes": "Themes",
+        "packages": "Packages",
+        "testimonials": "Testimonials",
+        "bookNow": "Book Now",
+        "menu": "Menu",
+        "contact": "Contact"
+    },
+    "Layout": {
+        "metadata": {
+            "title": "Rooftop Istanbul - Professional Photoshoot Experiences",
+            "description": "Capture your best memories with the Bosphorus view. Flying Dress, Rooftop, and more photoshoot concepts in Istanbul."
+        }
+    },
+    "Footer": {
+        "description": "Capture your memories with the most iconic views of Istanbul. Professional photoshoot services on the best rooftops.",
+        "navigation": "Navigation",
+        "contact": "Contact",
+        "social": "Social",
+        "rights": "All reserved.",
+        "phone": "+90 532 291 94 67",
+        "email": "nova.photo34@gmail.com",
+        "address": "Süleymaniye, Siyavuş Paşa Sk. No:24, 34116 Fatih/İstanbul",
+        "madeBy": "Made by Istanbul Photographer"
+    },
+    "Contact": {
+        "title": "Contact Us",
+        "description": "Get in touch with us for your dream photoshoot in Istanbul.",
+        "info": "Contact Information",
+        "formTitle": "Send us a message",
+        "addressLabel": "Address",
+        "emailLabel": "Email",
+        "phoneLabel": "Phone / WhatsApp",
+        "chatWhatsapp": "Chat on WhatsApp",
+        "googleMapsDesc": "View our location, photos, and reviews directly on Google Maps.",
+        "openMaps": "Open Google Maps Profile"
+    },
+    "Home": {
+        "hero": {
+            "tag": "Premium Photography Studio",
+            "ctaPrimary": "Check Packages",
+            "ctaSecondary": "Explore Themes"
+        },
+        "themes": {
+            "title": "Photo Themes",
+            "description": "We offer a variety of themes to make your photoshoot unique. Choose your favorite or combine them for a full album.",
+            "noConcepts": "No concepts found."
+        },
+        "whyUs": {
+            "title": "Why Choose Us"
+        }
+    },
+    "Testimonials": {
+        "title": "Client Love",
+        "description": "Don't just take our word for it. Here is what our beautiful guests say about their experience."
+    },
+    "Packages": {
+        "title": "Our Packages",
+        "description": "Transparent pricing for every budget. Choose the perfect package for your Istanbul memory.",
+        "tabs": {
+            "studio": "Studio Photoshoot",
+            "outdoor": "Outdoor Photoshoot"
+        },
+        "noOutdoor": "No outdoor packages available.",
+        "noStudio": "Studio packages coming soon!",
+        "custom": {
+            "title": "Need something custom?",
+            "description": "We also offer private group sessions, marriage proposals, and catalogue shoots.",
+            "cta": "Contact us for a quote"
+        },
+        "error": "Error loading packages. Please try again later.",
+        "selectButton": "Select Package",
+        "mostPopular": "Most Popular",
+        "perPerson": "/ person"
+    },
+    "Reservation": {
+        "title": "Complete Reservation",
+        "personalInfo": "Personal Information",
+        "participants": "Participants",
+        "extras": "Extras",
+        "name": "Full Name",
+        "email": "Email Address",
+        "whatsapp": "WhatsApp Number",
+        "date": "Photoshoot Date & Time",
+        "pickDate": "Pick a date",
+        "selectTime": "Select Time",
+        "package": "Selected Package",
+        "extra": "Do you want to add extra packages? (Optional)",
+        "vip": "I want VIP Transfer",
+        "vipDescription": "Premium private transfer for your entire group.",
+        "makeup": "I want Basic Makeup",
+        "makeupDescription": "Professional basic makeup for {count} participants.",
+        "addOns": "Add-on Packages",
+        "adults": "Adults",
+        "children": "Children (<6 Years)",
+        "childDress": "Child Dress Rental (30€/child)",
+        "submit": "Submit Reservation",
+        "submitting": "Submitting...",
+        "success": "Reservation submitted successfully! We will contact you soon.",
+        "error": "Error submitting reservation. Please try again.",
+        "notes": "Notes & Special Requests",
+        "notesPlaceholder": "Any questions or special requirements?",
+        "discountApplied": "Discount Applied",
+        "discount": "Discount",
+        "totalPrice": "Total Price",
+        "perPerson": "/ person",
+        "selectPlaceholder": "Select",
+        "errors": {
+            "selectDate": "Please select a date and time for your photoshoot."
+        }
+    },
+    "Breadcrumbs": {
+        "home": "Home",
+        "our-packages": "Our Packages",
+        "contact": "Contact",
+        "about": "About Us",
+        "themes": "Themes",
+        "reservation": "Reservation"
+    }
+}
