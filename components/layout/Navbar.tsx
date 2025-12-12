@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import {
     Sheet,
     SheetContent,
+    SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
 import { useState } from "react"
@@ -74,6 +75,7 @@ export default function Navbar() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px] sm:w-[400px] flex flex-col pt-12">
+                            <SheetTitle className="sr-only">{t('menu')}</SheetTitle>
                             <div className="flex flex-col gap-6 items-center mt-4">
                                 <Link
                                     href="/themes"

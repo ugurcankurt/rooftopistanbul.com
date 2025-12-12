@@ -1,8 +1,6 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
-import { createClient } from "@/lib/supabase-browser"
+import { createBooking } from "@/app/actions/booking-actions"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon, Loader2, CheckCircle2, AlertCircle, User, Users, Sparkles } from "lucide-react"
 
@@ -39,6 +37,8 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { getLocalized } from "@/lib/i18n-utils"
+import { enUS, tr, ru, ar, es } from "date-fns/locale"
+import { useCurrency } from "@/context/CurrencyContext"
 
 interface Package {
     id: string
@@ -62,14 +62,12 @@ const VIP_PRICE = 150 // Flat fee
 const MAKEUP_PRICE = 50 // Per person
 const CHILD_DRESS_PRICE = 30 // Per dress
 
-// Generate time slots (09:00 to 19:00)
-const timeSlots = Array.from({ length: 21 }, (_, i) => {
-    const hour = Math.floor(i / 2) + 9
+// Generate time slots (08:00 to 21:00)
+const timeSlots = Array.from({ length: 30 }, (_, i) => {
+    const hour = Math.floor(i / 2) + 8
     const minute = i % 2 === 0 ? "00" : "30"
     return `${hour.toString().padStart(2, '0')}:${minute}`
-}).filter(t => t <= "19:00")
-
-import { enUS, tr, ru, ar, es } from "date-fns/locale"
+}).filter(t => t <= "21:00")
 
 const locales: { [key: string]: any } = {
     en: enUS,
@@ -78,8 +76,6 @@ const locales: { [key: string]: any } = {
     ar: ar,
     es: es
 }
-
-import { useCurrency } from "@/context/CurrencyContext"
 
 export default function ReservationModal({
     isOpen,
@@ -100,6 +96,18 @@ export default function ReservationModal({
     // Form State
     const [date, setDate] = useState<Date>()
     const [time, setTime] = useState<string>("")
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
+    // Helper to auto-advance focus
+    const focusNext = (id: string) => {
+        setTimeout(() => {
+            const el = document.getElementById(id)
+            if (el) {
+                el.focus()
+                el.click()
+            }
+        }, 100)
+    }
 
     const [formData, setFormData] = useState({
         full_name: '',
@@ -117,6 +125,29 @@ export default function ReservationModal({
     const [totalPriceEur, setTotalPriceEur] = useState(packagePrice)
     const [discountAmountEur, setDiscountAmountEur] = useState(0)
 
+    // Reset state when modal closes
+    useEffect(() => {
+        if (!isOpen) {
+            setFormData({
+                full_name: '',
+                email: '',
+                whatsapp: '',
+                notes: '',
+                vip_transfer: false,
+                basic_makeup: false,
+                people_count: 1,
+                child_count: 0,
+                child_dress_count: 0,
+            })
+            setDate(undefined)
+            setTime("")
+            setSelectedExtras([])
+            setDiscountAmountEur(0)
+            setSuccess(false)
+            setError(null)
+        }
+    }, [isOpen])
+
     // Reset child dress count if package is outdoor
     useEffect(() => {
         if (packageCategory === 'outdoor') {
@@ -127,18 +158,48 @@ export default function ReservationModal({
     // Calculate total price whenever dependencies change (IN EUR)
     useEffect(() => {
         let packageTotal = (packagePrice * formData.people_count) // Per person pricing
+
+        let extrasTotal = 0
+        selectedExtras.forEach(extraId => {
+            const extraPkg = allPackages.find(p => p.id === extraId)
+            if (extraPkg) {
+                extrasTotal += (extraPkg.price * formData.people_count)
+            }
+        })
+
         let calculatedDiscount = 0
 
-        // Discount Logic: Outdoor only, 20% for 2 people, 30% for 3+ people
-        if (packageCategory === 'outdoor') {
+        // Discount Logic: Applies if Primary Package is Outdoor OR if any Extra is Outdoor
+        const isOutdoorMain = packageCategory === 'outdoor'
+        const hasOutdoorExtra = selectedExtras.some(id => allPackages.find(p => p.id === id)?.category === 'outdoor')
+
+        if (isOutdoorMain || hasOutdoorExtra) {
+            const discountableAmount = isOutdoorMain ? packageTotal : 0
+
+            // If main is not outdoor but we have outdoor extra, we might only discount the extra?
+            // User request: "kullanıcı studio paketi seçip ekstra olarak outdoor paketi eklerse yine mevcut indirimleri eklemelisin"
+            // Interpretation: The GROUP discount (20/30%) applies to the *outdoor components*.
+            // Since the logic is specific, let's calculate discount on Outdoor parts.
+
+            let amountSubjectToDiscount = 0
+
+            if (isOutdoorMain) amountSubjectToDiscount += packageTotal
+
+            selectedExtras.forEach(extraId => {
+                const extraPkg = allPackages.find(p => p.id === extraId)
+                if (extraPkg && extraPkg.category === 'outdoor') {
+                    amountSubjectToDiscount += (extraPkg.price * formData.people_count)
+                }
+            })
+
             if (formData.people_count === 2) {
-                calculatedDiscount = packageTotal * 0.20
+                calculatedDiscount = amountSubjectToDiscount * 0.20
             } else if (formData.people_count >= 3) {
-                calculatedDiscount = packageTotal * 0.30
+                calculatedDiscount = amountSubjectToDiscount * 0.30
             }
         }
 
-        let total = packageTotal - calculatedDiscount
+        let total = packageTotal + extrasTotal - calculatedDiscount
 
         if (formData.vip_transfer) total += VIP_PRICE // Flat fee
         if (formData.basic_makeup) total += (MAKEUP_PRICE * formData.people_count) // Per person
@@ -147,13 +208,6 @@ export default function ReservationModal({
         if (formData.child_dress_count > 0) {
             total += (formData.child_dress_count * CHILD_DRESS_PRICE)
         }
-
-        selectedExtras.forEach(extraId => {
-            const extraPkg = allPackages.find(p => p.id === extraId)
-            if (extraPkg) {
-                total += (extraPkg.price * formData.people_count) // Extra packages also per person
-            }
-        })
 
         setDiscountAmountEur(calculatedDiscount)
         setTotalPriceEur(total)
@@ -182,8 +236,36 @@ export default function ReservationModal({
                 .filter(Boolean)
                 .join(', ')
 
-            const supabase = createClient()
-            const { error: submitError } = await supabase.from('bookings').insert({
+            // --- DETAILED BILLING CALCULATION ---
+            const packageBaseTotal = packagePrice * formData.people_count
+            const extrasList = []
+
+            if (formData.vip_transfer) extrasList.push({ name: 'VIP Transfer', price: VIP_PRICE })
+            if (formData.basic_makeup) extrasList.push({ name: 'Basic Makeup', price: MAKEUP_PRICE * formData.people_count })
+            if (formData.child_dress_count > 0) extrasList.push({ name: 'Child Dress Rental', price: formData.child_dress_count * CHILD_DRESS_PRICE })
+
+            selectedExtras.forEach(extraId => {
+                const extraPkg = allPackages.find(p => p.id === extraId)
+                if (extraPkg) {
+                    extrasList.push({ name: getLocalized(extraPkg.name, 'en'), price: extraPkg.price * formData.people_count })
+                }
+            })
+
+            const paymentDetails = {
+                base_price: packageBaseTotal,
+                unit_price: packagePrice,
+                people_count: formData.people_count,
+                discount_amount: discountAmountEur,
+                discount_rate: discountAmountEur > 0 ? (formData.people_count === 2 ? 0.20 : 0.30) : 0,
+                final_package_price: packageBaseTotal - discountAmountEur,
+                extras: extrasList,
+                extras_total: totalPriceEur - (packageBaseTotal - discountAmountEur),
+                final_total: totalPriceEur,
+                currency: 'EUR'
+            }
+
+            // Server Action for Secure Insert (Bypassing RLS)
+            const result = await createBooking({
                 full_name: formData.full_name,
                 email: formData.email,
                 whatsapp: formData.whatsapp,
@@ -198,31 +280,39 @@ export default function ReservationModal({
                 child_count: formData.child_count,
                 child_dress_count: formData.child_dress_count,
                 total_amount: totalPriceEur, // Submitting EUR amount
-                currency: 'EUR' // Ideally we should add this if column exists, but usually safer to stick to base.
+                payment_details: paymentDetails
             })
 
-            if (submitError) throw submitError
+            if (!result.success) {
+                throw new Error(result.error || 'Submission failed')
+            }
+
+            const data = result.data
 
             setSuccess(true)
             setTimeout(() => {
                 onClose()
-                setSuccess(false)
-                setFormData({
-                    full_name: '',
-                    email: '',
-                    whatsapp: '',
-                    notes: '',
-                    vip_transfer: false,
-                    basic_makeup: false,
-                    people_count: 1,
-                    child_count: 0,
-                    child_dress_count: 0,
-                })
-                setDate(undefined)
-                setTime("")
-                setSelectedExtras([])
-                setDiscountAmountEur(0)
-            }, 3000)
+                if (data && data.id) {
+                    window.location.href = `/${locale}/reservation-success/${data.id}`
+                }
+            }, 1000)
+
+            // Clear form
+            setFormData({
+                full_name: '',
+                email: '',
+                whatsapp: '',
+                notes: '',
+                vip_transfer: false,
+                basic_makeup: false,
+                people_count: 1,
+                child_count: 0,
+                child_dress_count: 0,
+            })
+            setDate(undefined)
+            setTime("")
+            setSelectedExtras([])
+            setDiscountAmountEur(0)
         } catch (err) {
             console.error('Error submitting reservation:', err)
             setError(t('error'))
@@ -367,8 +457,8 @@ export default function ReservationModal({
                                     {/* Date and Time Selection */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-2 flex flex-col">
-                                            <Label className="">{t('date')}</Label>
-                                            <Popover>
+                                            <Label className="">{t('dateLabel')}</Label>
+                                            <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                                                 <PopoverTrigger asChild>
                                                     <Button
                                                         variant={"outline"}
@@ -385,7 +475,11 @@ export default function ReservationModal({
                                                     <Calendar
                                                         mode="single"
                                                         selected={date}
-                                                        onSelect={setDate}
+                                                        onSelect={(d) => {
+                                                            setDate(d)
+                                                            setIsCalendarOpen(false)
+                                                            if (d) focusNext('time-trigger')
+                                                        }}
                                                         disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
                                                         initialFocus
                                                         locale={locales[locale] || enUS}
@@ -395,9 +489,15 @@ export default function ReservationModal({
                                         </div>
 
                                         <div className="space-y-2">
-                                            <Label htmlFor="time">{t('date').replace('Photoshoot Date & ', '')}</Label>
-                                            <Select value={time} onValueChange={setTime}>
-                                                <SelectTrigger className="h-11">
+                                            <Label htmlFor="time">{t('timeLabel')}</Label>
+                                            <Select
+                                                value={time}
+                                                onValueChange={(v) => {
+                                                    setTime(v)
+                                                    focusNext('people_count')
+                                                }}
+                                            >
+                                                <SelectTrigger id="time-trigger" className="h-11">
                                                     <SelectValue placeholder={t('selectTime')} />
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -433,7 +533,12 @@ export default function ReservationModal({
                                         <Label htmlFor="people_count" className="text-xs uppercase text-muted-foreground font-bold h-8 flex items-end pb-1">{t('adults')}</Label>
                                         <Select
                                             value={formData.people_count.toString()}
-                                            onValueChange={(val) => handleSelectChange('people_count', val)}
+                                            onValueChange={(val) => {
+                                                handleSelectChange('people_count', val)
+                                                // Optional: Only jump if val is set? Always jump?
+                                                // Let's jump to child count
+                                                focusNext('child_count')
+                                            }}
                                         >
                                             <SelectTrigger id="people_count" className="h-11">
                                                 <SelectValue placeholder={t('selectPlaceholder')} />
@@ -628,5 +733,3 @@ export default function ReservationModal({
         </Dialog>
     )
 }
-
-

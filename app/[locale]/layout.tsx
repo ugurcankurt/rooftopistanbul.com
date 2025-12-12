@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import { CurrencyProvider } from "@/context/CurrencyContext";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,6 +61,7 @@ export default async function RootLayout({
               {children}
             </main>
             <Footer />
+            <WhatsAppButton />
           </CurrencyProvider>
         </NextIntlClientProvider>
       </body>
