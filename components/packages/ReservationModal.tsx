@@ -39,6 +39,7 @@ import { cn } from "@/lib/utils"
 import { getLocalized } from "@/lib/i18n-utils"
 import { enUS, tr, ru, ar, es } from "date-fns/locale"
 import { useCurrency } from "@/context/CurrencyContext"
+import { sendGAEvent } from "@/lib/analytics"
 
 interface Package {
     id: string
@@ -290,6 +291,27 @@ export default function ReservationModal({
             const data = result.data
 
             setSuccess(true)
+
+            // Track Purchase Event
+            sendGAEvent('purchase', {
+                transaction_id: data.id,
+                value: totalPriceEur,
+                currency: 'EUR',
+                items: [
+                    {
+                        item_id: packageId,
+                        item_name: packageName,
+                        price: packagePrice,
+                        quantity: formData.people_count
+                    },
+                    ...selectedExtras.map(id => ({
+                        item_id: id,
+                        item_name: 'Extra Package', // ideally detailed name but ID is tracked
+                        price: 0 // complex pricing structure 
+                    }))
+                ]
+            })
+
             setTimeout(() => {
                 onClose()
                 if (data && data.id) {
