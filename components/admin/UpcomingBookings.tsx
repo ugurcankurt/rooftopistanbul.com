@@ -4,6 +4,7 @@ import { format, isToday, isTomorrow, parseISO } from "date-fns"
 import { tr } from "date-fns/locale"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users, Package, Clock, Phone, ArrowUpRight } from "lucide-react"
+import { getWhatsAppLink } from "@/lib/whatsapp"
 
 interface Booking {
     id: string
@@ -132,7 +133,7 @@ function BookingCard({ booking, isToday }: { booking: Booking, isToday: boolean 
                     </div>
 
                     <a
-                        href={`https://wa.me/${booking.whatsapp.replace(/[^0-9]/g, '')}`}
+                        href={getWhatsAppLink(booking)}
                         target="_blank"
                         rel="noreferrer"
                         className="text-gray-400 hover:text-green-600 transition-colors p-1"

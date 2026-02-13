@@ -5,16 +5,8 @@ import { format } from "date-fns"
 import { tr } from "date-fns/locale"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-// Table components removed as we use standard HTML table for simplicity
-/* import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow
-} from "@/components/ui/table" */
 import { updateBookingStatus } from "@/app/actions/booking-actions"
+import { getWhatsAppLink } from "@/lib/whatsapp"
 
 import {
     Dialog,
@@ -139,6 +131,16 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex justify-end gap-2">
+                                                <a
+                                                    href={getWhatsAppLink(booking)}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 hover:text-zinc-900 h-10 w-10 text-gray-500 hover:text-green-600"
+                                                    title="WhatsApp'tan Yaz"
+                                                >
+                                                    <Phone size={18} />
+                                                </a>
+
                                                 <Dialog>
                                                     <DialogTrigger asChild>
                                                         <Button variant="ghost" size="icon" onClick={() => setViewBooking(booking)}>
