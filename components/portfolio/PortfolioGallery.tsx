@@ -54,13 +54,13 @@ export default function PortfolioGallery({ images, locale }: PortfolioGalleryPro
         <div className="space-y-8">
             {/* Filter Tabs */}
             <div className="flex justify-center mb-8">
-                <Tabs defaultValue="all" value={filter} onValueChange={setFilter} className="w-auto">
-                    <TabsList className="flex flex-wrap justify-center h-auto p-1 bg-muted/30 rounded-full gap-1">
+                <Tabs defaultValue="all" value={filter} onValueChange={setFilter} className="w-full max-w-3xl mx-auto">
+                    <TabsList className="flex flex-wrap justify-center !h-auto p-2 bg-muted/30 rounded-xl gap-2">
                         {categories.map(cat => (
                             <TabsTrigger
                                 key={cat}
                                 value={cat}
-                                className="capitalize px-4 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-primary-foreground min-w-[80px]"
+                                className="capitalize px-4 py-2 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground min-w-[80px] h-9"
                             >
                                 {t(`tabs.${cat}`)}
                             </TabsTrigger>
@@ -112,26 +112,23 @@ export default function PortfolioGallery({ images, locale }: PortfolioGalleryPro
 
             {/* Lightbox Modal */}
             <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
-                <DialogContent className="max-w-screen-xl w-full h-[90vh] p-0 bg-black/95 border-none shadow-none flex items-center justify-center outline-none">
+                <DialogContent showCloseButton={false} className="max-w-fit w-auto h-auto p-0 bg-transparent border-none shadow-none outline-none focus:outline-none ring-0 focus:ring-0">
                     <DialogTitle className="sr-only">
                         {selectedImage ? getAlt(selectedImage) : t('title')}
                     </DialogTitle>
-                    <div className="relative w-full h-full flex items-center justify-center p-4">
+                    <div className="relative flex items-center justify-center">
                         <button
                             onClick={() => setSelectedImage(null)}
-                            className="absolute top-4 right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-white/20 transition-colors"
+                            className="absolute -top-12 right-0 md:top-4 md:right-4 z-50 p-2 bg-black/50 text-white rounded-full hover:bg-white/20 transition-colors"
                         >
                             <X size={24} />
                         </button>
 
                         {selectedImage && (
-                            <Image
+                            <img
                                 src={getImageUrl(selectedImage.storage_path)}
                                 alt={getAlt(selectedImage)}
-                                fill
-                                className="object-contain"
-                                sizes="100vw"
-                                priority
+                                className="max-w-[95vw] max-h-[90vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
                             />
                         )}
                     </div>

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { createClient } from "@/lib/supabase-browser"
+import imageCompression from "browser-image-compression"
 import Image from "next/image"
 import { Loader2, Trash2, Upload, Plus, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -51,12 +52,29 @@ export default function PortfolioManager({ initialImages }: { initialImages: Por
             // Process uploads sequentially or in parallel?
             // Parallel is better for user experience.
             const uploadPromises = files.map(async (file) => {
-                const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}-${file.name}`
+                // Image compression and WebP conversion options
+                const options = {
+                    maxSizeMB: 0.4, // 400KB
+                    maxWidthOrHeight: 1920,
+                    useWebWorker: true,
+                    fileType: 'image/webp'
+                }
+
+                let processedFile: File | Blob = file
+                try {
+                    processedFile = await imageCompression(file, options)
+                } catch (error) {
+                    console.error("Compression error:", error)
+                    // If compression fails, we'll try to upload the original
+                }
+
+                const baseName = file.name.split('.').slice(0, -1).join('.')
+                const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}-${baseName}.webp`
 
                 // 1. Upload to Storage
                 const { error: uploadError } = await supabase.storage
                     .from('portfolio')
-                    .upload(fileName, file)
+                    .upload(fileName, processedFile)
 
                 if (uploadError) throw uploadError
 

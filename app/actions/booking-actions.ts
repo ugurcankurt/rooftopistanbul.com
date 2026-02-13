@@ -28,7 +28,7 @@ export async function getAdminBookings() {
         const { data, error } = await supabase
             .from('bookings')
             .select('*')
-            .order('created_at', { ascending: false })
+            .order('photoshoot_date', { ascending: false })
 
         if (error) {
             console.error('Error fetching bookings:', error)
