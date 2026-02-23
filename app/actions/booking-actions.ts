@@ -128,3 +128,49 @@ export async function createBooking(bookingData: any) {
         return { success: false, error: 'Internal Server Error' }
     }
 }
+
+export async function updateBookingDetails(id: string, updates: any) {
+    try {
+        const supabase = getSupabaseAdmin()
+
+        if (!supabase) {
+            return {
+                success: false,
+                error: 'Missing config'
+            }
+        }
+
+        // Only allow updating certain fields for security
+        const allowedUpdates = {
+            photoshoot_date: updates.photoshoot_date,
+            package_name: updates.package_name,
+            people_count: updates.people_count,
+            total_amount: updates.total_amount,
+            notes: updates.notes,
+            whatsapp: updates.whatsapp,
+            full_name: updates.full_name,
+            email: updates.email,
+        }
+
+        // remove undefined values
+        Object.keys(allowedUpdates).forEach(key =>
+            // @ts-ignore
+            allowedUpdates[key] === undefined && delete allowedUpdates[key]
+        )
+
+        const { error } = await supabase
+            .from('bookings')
+            .update(allowedUpdates)
+            .eq('id', id)
+
+        if (error) {
+            console.error('Error updating booking details:', error)
+            return { success: false, error: error.message }
+        }
+
+        return { success: true }
+    } catch (error) {
+        console.error('Unexpected error:', error)
+        return { success: false, error: 'Internal Server Error' }
+    }
+}

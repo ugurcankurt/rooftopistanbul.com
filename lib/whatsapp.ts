@@ -1,5 +1,6 @@
 import { format } from "date-fns"
 import { enUS } from "date-fns/locale"
+import { getIstanbulDate } from "@/lib/date-utils"
 
 interface Booking {
     full_name: string
@@ -19,8 +20,8 @@ export const getWhatsAppLink = (booking: Booking) => {
     const phone = booking.whatsapp.replace(/[^0-9]/g, '')
 
     // Format date and time
-    const date = format(new Date(booking.photoshoot_date), "MMMM d, yyyy", { locale: enUS })
-    const time = format(new Date(booking.photoshoot_date), "HH:mm")
+    const date = format(getIstanbulDate(booking.photoshoot_date), "MMMM d, yyyy", { locale: enUS })
+    const time = format(getIstanbulDate(booking.photoshoot_date), "HH:mm")
 
     // Emojis
     const WAVE = "👋"
@@ -68,6 +69,21 @@ export const getWhatsAppLink = (booking: Booking) => {
 
     message += `\n${PIN} Location: https://maps.app.goo.gl/ruaBwRguuqqCYqie7\n`
     message += `We can't wait to host you! Feel free to ask any questions here. ${CAMERA}`
+
+    return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`
+}
+
+export const getWhatsAppReviewLink = (booking: Booking) => {
+    const phone = booking.whatsapp.replace(/[^0-9]/g, '')
+
+    const STAR = "⭐"
+    const HEART = "❤️"
+
+    let message = `Hello ${booking.full_name}, ${HEART}\n\n`
+    message += `Thank you for choosing us for your photoshoot! We hope you had a great time.\n\n`
+    message += `Would you mind taking a minute to share your experience with us on Google? It means the world to us! ${STAR}\n\n`
+    message += `https://maps.app.goo.gl/z5ducnNLi1EjDmiP7\n\n`
+    message += `Best regards,\nNova PHoto Istanbul Team`
 
     return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`
 }

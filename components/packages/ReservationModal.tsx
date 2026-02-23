@@ -225,8 +225,10 @@ export default function ReservationModal({
         }
 
         try {
-            // Construct ISO Date
-            const isoDateTime = new Date(`${format(date, 'yyyy-MM-dd')}T${time}:00`).toISOString()
+            // Construct ISO Date explicitly in UTC+3 (Istanbul Time)
+            // format(date, 'yyyy-MM-dd') gives the exact date selected (e.g. 2025-05-15)
+            // Adding T${time}:00+03:00 makes it deterministic regardless of where the user's browser is.
+            const isoDateTime = `${format(date, 'yyyy-MM-dd')}T${time}:00+03:00`
 
             // Construct extra offer request summary
             const extraPackageNames = selectedExtras

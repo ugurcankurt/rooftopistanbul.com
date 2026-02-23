@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { format } from "date-fns"
 import { tr } from "date-fns/locale"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { updateBookingStatus } from "@/app/actions/booking-actions"
-import { getWhatsAppLink } from "@/lib/whatsapp"
+import { updateBookingStatus, updateBookingDetails } from "@/app/actions/booking-actions"
+import { getWhatsAppLink, getWhatsAppReviewLink } from "@/lib/whatsapp"
+import { getIstanbulDate, isBookingCompleted } from "@/lib/date-utils"
 
 import {
     Dialog,
@@ -17,7 +18,7 @@ import {
     DialogFooter,
     DialogClose
 } from "@/components/ui/dialog"
-import { Loader2, CheckCircle, XCircle, Eye, Calendar, User, Phone, Mail, Package } from "lucide-react"
+import { Loader2, CheckCircle, XCircle, Eye, Calendar, User, Phone, Mail, Package, Pencil, Star } from "lucide-react"
 
 interface Booking {
     id: string
@@ -46,6 +47,10 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
     const [loadingId, setLoadingId] = useState<string | null>(null)
     const [viewBooking, setViewBooking] = useState<Booking | null>(null)
 
+    const [editBooking, setEditBooking] = useState<Booking | null>(null)
+    const [editForm, setEditForm] = useState<any>({})
+    const [isSaving, setIsSaving] = useState(false)
+
     const updateStatus = async (id: string, newStatus: string) => {
         setLoadingId(id)
 
@@ -64,16 +69,118 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
         }
     }
 
-    const getStatusBadge = (status: string) => {
-        switch (status) {
-            case 'confirmed':
-                return <Badge className="bg-green-600 hover:bg-green-700">Onaylandı</Badge>
-            case 'cancelled':
-                return <Badge variant="destructive">İptal</Badge>
-            default:
-                return <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200">Beklemede</Badge>
+    const getStatusBadge = (booking: Booking) => {
+        if (booking.status === 'cancelled') {
+            return <Badge variant="destructive">İptal</Badge>
+        }
+
+        if (booking.status === 'confirmed') {
+            if (isBookingCompleted(booking.photoshoot_date)) {
+                return <Badge className="bg-blue-600 hover:bg-blue-700">Tamamlandı</Badge>
+            }
+            return <Badge className="bg-green-600 hover:bg-green-700">Onaylandı</Badge>
+        }
+
+        return <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200">Beklemede</Badge>
+    }
+
+    const handleEditClick = (booking: Booking) => {
+        const d = getIstanbulDate(booking.photoshoot_date)
+        const dateStr = format(d, "yyyy-MM-dd")
+        const timeStr = format(d, "HH:mm")
+
+        setEditForm({
+            full_name: booking.full_name || "",
+            email: booking.email || "",
+            whatsapp: booking.whatsapp || "",
+            package_name: booking.package_name || "",
+            people_count: booking.people_count || 1,
+            total_amount: booking.total_amount || 0,
+            date: dateStr,
+            time: timeStr,
+            notes: booking.notes || ""
+        })
+        setEditBooking(booking)
+    }
+
+    const handleSaveEdit = async () => {
+        if (!editBooking) return
+        setIsSaving(true)
+
+        try {
+            const isoDateTime = `${editForm.date}T${editForm.time}:00+03:00`
+
+            const updates = {
+                full_name: editForm.full_name,
+                email: editForm.email,
+                whatsapp: editForm.whatsapp,
+                package_name: editForm.package_name,
+                people_count: parseInt(editForm.people_count),
+                total_amount: parseFloat(editForm.total_amount) || null,
+                photoshoot_date: isoDateTime,
+                notes: editForm.notes
+            }
+
+            const res = await updateBookingDetails(editBooking.id, updates)
+
+            if (res.success) {
+                setBookings(prev => prev.map(b => b.id === editBooking.id ? { ...b, ...updates } as Booking : b))
+                setEditBooking(null)
+            } else {
+                alert("Güncelleme başarısız oldu: " + res.error)
+            }
+        } catch (error) {
+            console.error(error)
+            alert("Bir hata oluştu.")
+        } finally {
+            setIsSaving(false)
         }
     }
+
+    const sortedBookings = useMemo(() => {
+        return [...bookings].sort((a, b) => {
+            const dateA = getIstanbulDate(a.photoshoot_date).getTime()
+            const dateB = getIstanbulDate(b.photoshoot_date).getTime()
+            const isCompletedA = isBookingCompleted(a.photoshoot_date)
+            const isCompletedB = isBookingCompleted(b.photoshoot_date)
+
+            // Calculate sort priority groups
+            // Group 1: Pending (highest priority)
+            // Group 2: Confirmed & Upcoming (sorted ascending)
+            // Group 3: Confirmed & Completed (sorted descending)
+            // Group 4: Cancelled (lowest priority)
+            const getPriority = (booking: Booking, isCompleted: boolean) => {
+                if (booking.status === 'pending') return 1
+                if (booking.status === 'confirmed' && !isCompleted) return 2
+                if (booking.status === 'confirmed' && isCompleted) return 3
+                return 4 // cancelled
+            }
+
+            const priorityA = getPriority(a, isCompletedA)
+            const priorityB = getPriority(b, isCompletedB)
+
+            if (priorityA !== priorityB) {
+                return priorityA - priorityB
+            }
+
+            // If same priority, sort by date depending on the group
+            if (priorityA === 1) {
+                // For pending, closest upcoming first
+                return dateA - dateB
+            }
+            if (priorityA === 2) {
+                // For confirmed & upcoming, closest upcoming first
+                return dateA - dateB
+            }
+            if (priorityA === 3) {
+                // For completed, most recently completed first
+                return dateB - dateA
+            }
+
+            // For cancelled, most recently cancelled first (using date)
+            return dateB - dateA
+        })
+    }, [bookings])
 
     return (
         <div className="space-y-4">
@@ -92,22 +199,22 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                             </tr>
                         </thead>
                         <tbody>
-                            {bookings.length === 0 ? (
+                            {sortedBookings.length === 0 ? (
                                 <tr>
                                     <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
                                         Henüz rezervasyon bulunmuyor.
                                     </td>
                                 </tr>
                             ) : (
-                                bookings.map((booking) => (
+                                sortedBookings.map((booking) => (
                                     <tr key={booking.id} className="bg-white border-b hover:bg-gray-50 transition-colors">
                                         <td className="px-6 py-4 font-medium whitespace-nowrap">
                                             <div className="flex flex-col">
                                                 <span className="text-gray-900 font-semibold">
-                                                    {format(new Date(booking.photoshoot_date), "d MMMM yyyy", { locale: tr })}
+                                                    {format(getIstanbulDate(booking.photoshoot_date), "d MMMM yyyy", { locale: tr })}
                                                 </span>
                                                 <span className="text-gray-500">
-                                                    {format(new Date(booking.photoshoot_date), "HH:mm")}
+                                                    {format(getIstanbulDate(booking.photoshoot_date), "HH:mm")}
                                                 </span>
                                             </div>
                                         </td>
@@ -127,7 +234,7 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                             {booking.total_amount ? `€${booking.total_amount}` : '-'}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {getStatusBadge(booking.status)}
+                                            {getStatusBadge(booking)}
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex justify-end gap-2">
@@ -140,6 +247,18 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                                 >
                                                     <Phone size={18} />
                                                 </a>
+
+                                                {booking.status === 'confirmed' && isBookingCompleted(booking.photoshoot_date) && (
+                                                    <a
+                                                        href={getWhatsAppReviewLink(booking)}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-amber-50 h-10 w-10 text-amber-500 hover:text-amber-600"
+                                                        title="Google Yorum İste"
+                                                    >
+                                                        <Star size={18} className="fill-amber-500" />
+                                                    </a>
+                                                )}
 
                                                 <Dialog>
                                                     <DialogTrigger asChild>
@@ -164,8 +283,8 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                                                     <div className="flex items-center gap-2 text-gray-500 mb-1">
                                                                         <Calendar size={16} /> <span className="text-xs font-medium uppercase">Tarih & Saat</span>
                                                                     </div>
-                                                                    <p className="font-medium"> {format(new Date(viewBooking.photoshoot_date), "d MMMM yyyy", { locale: tr })}</p>
-                                                                    <p className="text-sm text-gray-600">Saat: {format(new Date(viewBooking.photoshoot_date), "HH:mm")}</p>
+                                                                    <p className="font-medium"> {format(getIstanbulDate(viewBooking.photoshoot_date), "d MMMM yyyy", { locale: tr })}</p>
+                                                                    <p className="text-sm text-gray-600">Saat: {format(getIstanbulDate(viewBooking.photoshoot_date), "HH:mm")}</p>
                                                                 </div>
                                                                 <div className="space-y-1">
                                                                     <div className="flex items-center gap-2 text-gray-500 mb-1">
@@ -250,7 +369,7 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                                             </div>
                                                         )}
                                                         <DialogFooter className="gap-2 sm:gap-0">
-                                                            {viewBooking?.status === 'pending' && (
+                                                            {viewBooking?.status === 'pending' && !isBookingCompleted(viewBooking.photoshoot_date) && (
                                                                 <>
                                                                     <Button
                                                                         variant="destructive"
@@ -271,11 +390,16 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                                                                     </Button>
                                                                 </>
                                                             )}
+                                                            {/* Optionally we could add a manual complete button, but here logic is automatic */}
                                                         </DialogFooter>
                                                     </DialogContent>
                                                 </Dialog>
 
-                                                {booking.status === 'pending' && (
+                                                <Button variant="ghost" size="icon" onClick={() => handleEditClick(booking)}>
+                                                    <Pencil size={18} className="text-gray-500 hover:text-amber-600" />
+                                                </Button>
+
+                                                {booking.status === 'pending' && !isBookingCompleted(booking.photoshoot_date) && (
                                                     <>
                                                         <Button
                                                             variant="ghost"
@@ -306,6 +430,110 @@ export default function BookingTable({ initialBookings }: BookingTableProps) {
                     </table>
                 </div>
             </div>
+
+            {/* Edit Booking Dialog */}
+            <Dialog open={!!editBooking} onOpenChange={(open) => !open && setEditBooking(null)}>
+                <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto">
+                    <DialogHeader>
+                        <DialogTitle>Rezervasyonu Düzenle</DialogTitle>
+                    </DialogHeader>
+                    {editBooking && (
+                        <div className="grid grid-cols-2 gap-4 py-4">
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">Müşteri Adı</label>
+                                <input
+                                    type="text"
+                                    value={editForm.full_name}
+                                    onChange={(e) => setEditForm({ ...editForm, full_name: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">WhatsApp</label>
+                                <input
+                                    type="text"
+                                    value={editForm.whatsapp}
+                                    onChange={(e) => setEditForm({ ...editForm, whatsapp: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">E-posta</label>
+                                <input
+                                    type="email"
+                                    value={editForm.email}
+                                    onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">Paket</label>
+                                <input
+                                    type="text"
+                                    value={editForm.package_name}
+                                    onChange={(e) => setEditForm({ ...editForm, package_name: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">Tarih</label>
+                                <input
+                                    type="date"
+                                    value={editForm.date}
+                                    onChange={(e) => setEditForm({ ...editForm, date: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">Saat</label>
+                                <input
+                                    type="time"
+                                    value={editForm.time}
+                                    onChange={(e) => setEditForm({ ...editForm, time: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">Kişi Sayısı</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={editForm.people_count}
+                                    onChange={(e) => setEditForm({ ...editForm, people_count: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 sm:col-span-1 space-y-2">
+                                <label className="text-sm font-medium">Tutar (€)</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    value={editForm.total_amount}
+                                    onChange={(e) => setEditForm({ ...editForm, total_amount: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                            <div className="col-span-2 space-y-2">
+                                <label className="text-sm font-medium">Notlar</label>
+                                <textarea
+                                    value={editForm.notes}
+                                    onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[80px]"
+                                />
+                            </div>
+                        </div>
+                    )}
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setEditBooking(null)} disabled={isSaving}>
+                            İptal
+                        </Button>
+                        <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleSaveEdit} disabled={isSaving}>
+                            {isSaving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                            Kaydet
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

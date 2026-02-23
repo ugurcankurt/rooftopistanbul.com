@@ -8,6 +8,7 @@ import { format } from "date-fns"
 import { enUS, tr, ru, ar, es } from "date-fns/locale"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import { getIstanbulDate } from "@/lib/date-utils"
 
 const locales: { [key: string]: any } = {
     en: enUS,
@@ -65,10 +66,10 @@ export default async function ReservationSuccessPage({
                             </h3>
                             <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
                                 <p className="font-semibold text-lg text-gray-900">
-                                    {format(new Date(booking.photoshoot_date), "d MMMM yyyy", { locale: locales[locale] || enUS })}
+                                    {format(getIstanbulDate(booking.photoshoot_date), "d MMMM yyyy", { locale: locales[locale] || enUS })}
                                 </p>
                                 <p className="text-gray-600">
-                                    {format(new Date(booking.photoshoot_date), "HH:mm", { locale: locales[locale] || enUS })}
+                                    {format(getIstanbulDate(booking.photoshoot_date), "HH:mm", { locale: locales[locale] || enUS })}
                                 </p>
                             </div>
                         </div>

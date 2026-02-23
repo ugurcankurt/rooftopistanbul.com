@@ -5,6 +5,7 @@ import { tr } from "date-fns/locale"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Users, Package, Clock, Phone, ArrowUpRight } from "lucide-react"
 import { getWhatsAppLink } from "@/lib/whatsapp"
+import { getIstanbulDate, isIstanbulToday, isIstanbulTomorrow, isBookingCompleted } from "@/lib/date-utils"
 
 interface Booking {
     id: string
@@ -28,8 +29,8 @@ interface UpcomingBookingsProps {
 }
 
 export default function UpcomingBookings({ bookings }: UpcomingBookingsProps) {
-    const todayBookings = bookings.filter(booking => isToday(parseISO(booking.photoshoot_date)))
-    const tomorrowBookings = bookings.filter(booking => isTomorrow(parseISO(booking.photoshoot_date)))
+    const todayBookings = bookings.filter(booking => isIstanbulToday(booking.photoshoot_date))
+    const tomorrowBookings = bookings.filter(booking => isIstanbulTomorrow(booking.photoshoot_date))
 
 
 
@@ -86,18 +87,23 @@ export default function UpcomingBookings({ bookings }: UpcomingBookingsProps) {
 }
 
 function BookingCard({ booking, isToday }: { booking: Booking, isToday: boolean }) {
-    const time = format(parseISO(booking.photoshoot_date), "HH:mm")
+    const time = format(getIstanbulDate(booking.photoshoot_date), "HH:mm")
+
+    const isCompleted = booking.status === 'confirmed' && isBookingCompleted(booking.photoshoot_date)
 
     return (
         <div className={`
             relative overflow-hidden rounded-xl border p-4 transition-all hover:shadow-md
-            ${isToday
-                ? 'bg-amber-50/50 border-amber-200 hover:border-amber-300'
-                : 'bg-white border-gray-200 hover:border-blue-200'}
+            ${isCompleted
+                ? 'bg-blue-50/50 border-blue-200 hover:border-blue-300'
+                : isToday
+                    ? 'bg-amber-50/50 border-amber-200 hover:border-amber-300'
+                    : 'bg-white border-gray-200 hover:border-blue-200'}
         `}>
             {/* Status Indicator Stripe */}
-            <div className={`absolute left-0 top-0 bottom-0 w-1 ${booking.status === 'confirmed' ? 'bg-green-500' :
-                booking.status === 'cancelled' ? 'bg-red-500' : 'bg-yellow-400'
+            <div className={`absolute left-0 top-0 bottom-0 w-1 ${isCompleted ? 'bg-blue-500' :
+                    booking.status === 'confirmed' ? 'bg-green-500' :
+                        booking.status === 'cancelled' ? 'bg-red-500' : 'bg-yellow-400'
                 }`} />
 
             <div className="flex justify-between items-start pl-2">
