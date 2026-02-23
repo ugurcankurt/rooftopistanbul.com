@@ -22,9 +22,9 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 dark:bg-black/80 dark:border-gray-800 transition-all supports-[backdrop-filter]:bg-white/60">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                <Link href="/" className="flex items-center gap-3 group">
-                    <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-105">
+            <div className="container mx-auto px-2 sm:px-4 h-16 flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-1.5 sm:gap-3 group shrink-0">
+                    <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 transition-transform group-hover:scale-105 shrink-0">
                         <Image
                             src="/logo.png"
                             alt="Nova Photo Logo"
@@ -34,9 +34,9 @@ export default function Navbar() {
                             priority
                         />
                     </div>
-                    <div className="flex flex-col">
-                        <span className="text-xl md:text-2xl font-bold leading-none text-gray-900 dark:text-white tracking-tight">NOVA PHOTO</span>
-                        <span className="text-[0.6rem] md:text-[0.65rem] font-medium leading-none text-amber-500 uppercase tracking-[0.2em]">istanbul rooftop studio</span>
+                    <div className="flex flex-col min-w-0">
+                        <span className="text-[1.1rem] sm:text-lg md:text-2xl font-bold leading-none text-gray-900 dark:text-white tracking-tight truncate">NOVA PHOTO</span>
+                        <span className="text-[0.5rem] sm:text-[0.6rem] md:text-[0.65rem] font-medium leading-none text-amber-500 uppercase tracking-[0.1em] sm:tracking-[0.2em] truncate">istanbul rooftop studio</span>
                     </div>
                 </Link>
 
@@ -67,13 +67,15 @@ export default function Navbar() {
                 </div>
 
                 {/* Mobile Menu (Sheet) */}
-                <div className="md:hidden flex items-center gap-4">
-                    <CurrencySwitcher />
-                    <LanguageSwitcher />
+                <div className="md:hidden flex items-center gap-1 sm:gap-4 shrink-0">
+                    <div className="scale-90 sm:scale-100 flex items-center gap-1">
+                        <CurrencySwitcher />
+                        <LanguageSwitcher />
+                    </div>
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon" className="-mr-2">
-                                <Menu className="w-6 h-6" />
+                            <Button variant="ghost" size="icon" className="-mr-2 shrink-0">
+                                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
                                 <span className="sr-only">Toggle menu</span>
                             </Button>
                         </SheetTrigger>
