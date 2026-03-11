@@ -9,6 +9,7 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import { CurrencyProvider } from "@/context/CurrencyContext";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import MetaPixel from "@/components/analytics/MetaPixel";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,6 +83,7 @@ export default async function RootLayout({
             <Footer />
             <WhatsAppButton />
             <GoogleAnalytics />
+            <MetaPixel />
           </CurrencyProvider>
         </NextIntlClientProvider>
       </body>
