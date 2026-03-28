@@ -294,27 +294,8 @@ export default function ReservationModal({
 
             setSuccess(true)
 
-            // Track Purchase Event
-            sendGAEvent('purchase', {
-                transaction_id: data.id,
-                value: totalPriceEur,
-                currency: 'EUR',
-                items: [
-                    {
-                        item_id: packageId,
-                        item_name: packageName,
-                        price: packagePrice,
-                        quantity: formData.people_count
-                    },
-                    ...selectedExtras.map(id => ({
-                        item_id: id,
-                        item_name: 'Extra Package', // ideally detailed name but ID is tracked
-                        price: 0 // complex pricing structure 
-                    }))
-                ]
-            })
-
             setTimeout(() => {
+
                 onClose()
                 if (data && data.id) {
                     window.location.href = `/${locale}/reservation-success/${data.id}`
